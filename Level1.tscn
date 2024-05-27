@@ -1,25 +1,68 @@
-[gd_scene load_steps=5 format=3 uid="uid://ctj0l62u4xuid"]
+[gd_scene load_steps=8 format=3 uid="uid://ctj0l62u4xuid"]
 
 [ext_resource type="Script" path="res://Level.gd" id="1_1wnip"]
 [ext_resource type="Texture2D" uid="uid://cqo4t7j1c2muw" path="res://purple.png" id="1_jyi83"]
 [ext_resource type="PackedScene" uid="uid://dn8jk1x5pqkjd" path="res://player.tscn" id="2_w67ia"]
 [ext_resource type="PackedScene" uid="uid://exvq1ro01waa" path="res://maze.tscn" id="4_ywhf5"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_8ckl8"]
+font_size = 74
+
+[sub_resource type="LabelSettings" id="LabelSettings_rlreo"]
+font_size = 72
+
+[sub_resource type="LabelSettings" id="LabelSettings_q07dp"]
+font_size = 23
+
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_1wnip")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Graphics" type="Node" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Graphics"]
 layer = -10
 
-[node name="Background" type="TextureRect" parent="CanvasLayer"]
-offset_left = -6.0
-offset_top = -7.0
-offset_right = 3702.0
-offset_bottom = 1665.0
+[node name="Background" type="TextureRect" parent="Graphics/CanvasLayer"]
+z_index = -10
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("1_jyi83")
 stretch_mode = 1
 
+[node name="lblStart" type="Label" parent="Graphics"]
+z_index = -1
+offset_left = 462.0
+offset_top = 178.0
+offset_right = 683.0
+offset_bottom = 280.0
+text = "START"
+label_settings = SubResource("LabelSettings_8ckl8")
+
+[node name="lblEnd" type="Label" parent="Graphics"]
+z_index = -1
+offset_left = 3959.0
+offset_top = 1776.0
+offset_right = 4122.0
+offset_bottom = 1880.0
+text = "END"
+label_settings = SubResource("LabelSettings_rlreo")
+
+[node name="lblTutorial" type="Label" parent="Graphics"]
+z_index = -1
+offset_left = 799.0
+offset_top = 179.0
+offset_right = 1187.0
+offset_bottom = 506.0
+text = "- Use ASDW or arrow keys to move!
+- find the way to the END zone!
+- don't hit the walls!"
+label_settings = SubResource("LabelSettings_q07dp")
+
 [node name="Maze" parent="." instance=ExtResource("4_ywhf5")]
+z_index = -5
 position = Vector2(136, 139)
 
 [node name="Player" parent="." instance=ExtResource("2_w67ia")]
